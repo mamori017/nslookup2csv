@@ -55,6 +55,10 @@ namespace nslookup2csv
             {
                 Err.LogOutput(ex);
             }
+            finally
+            {
+                Console.ReadKey();
+            }
         }
 
         /// <summary>
@@ -103,37 +107,56 @@ namespace nslookup2csv
                 // Detail
                 for (int i = 0; i <= vstrLines.Length - 1; i++)
                 {
-                        strLine = vstrLines[i].ToLower();
+                    strLine = vstrLines[i].ToLower();
 
-                        if (strLine.ToLower().Contains("nslookup") == true )
-                        {
-                            j += 1;
-                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("nslookup") + 9);
-                            strOutputLines[j].Trim();
-                            strOutputLines[j] += "\t";
-                        }
+                    if (strLine.ToLower().Contains(">nslookup") == true )
+                    {
+                        j += 1;
+                        strOutputLines[j] += strLine.Substring(strLine.IndexOf(">nslookup") + 9).Trim();
+                        strOutputLines[j] += "\t";
+                    }
 
-                        if (strLine.Contains("サーバー:") == true)
-                        {
-                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("サーバー:") + 6);
-                            strOutputLines[j].Trim();
-                            strOutputLines[j] += "\t";
-                        }
 
-                        if (strLine.Contains("address:") == true)
-                        {
-                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("address:") + 9);
-                            strOutputLines[j].Trim();
-                            strOutputLines[j] += "\t";
-                        }
+                    if (strLine.Contains("サーバー:") == true)
+                    {
+                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("サーバー:") + 6).Trim();
+                        strOutputLines[j] += "\t";
+                    }
 
-                        if (strLine.Contains("名前:") == true)
+
+                    if (strLine.Contains("address:") == true)
+                    {
+                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("address:") + 9).Trim();
+                        strOutputLines[j] += "\t";
+                    }
+
+                    if (strLine.Contains("addresses:") == true)
+                    {
+                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("addresses:") + 10).Trim();
+                        strOutputLines[j] += "\t";
+
+                        while (true)
                         {
-                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("名前:") + 4);
-                            strOutputLines[j].Trim();
+                            i += 1;
+                            strOutputLines[j] += vstrLines[i].Trim();
                             strOutputLines[j] += "\t";
+
+                            if (vstrLines[i+1].Trim() == "" || vstrLines[i].ToLower().Contains(">nslookup"))
+                            {
+                                break;
+                            }
                         }
+                    }
+
+                    if (strLine.Contains("名前:") == true)
+                    {
+                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("名前:") + 4).Trim();
+                        strOutputLines[j] += "\t";
+                    }
                 }
+
+                Array.Resize(ref strOutputLines, j+1);
+
                 return strOutputLines;
             }
             catch (Exception ex)
