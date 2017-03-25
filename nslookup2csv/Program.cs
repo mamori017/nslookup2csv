@@ -1,23 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Text;
 
+/// <summary>
+/// nslookup2csv
+/// </summary>
 namespace nslookup2csv
 {
+    /// <summary>
+    /// Program
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Main
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
+            String[] strParams = Environment.GetCommandLineArgs();
+            String[] strLines;
+            Encoding objEncode = Encoding.GetEncoding("shift_jis");
+            String strOutputFileName = "";
+
             try
             {
-                String[] strParams = Environment.GetCommandLineArgs();
-                String[] strLines;
-                Encoding objEncode = Encoding.GetEncoding("shift_jis");
-                String strOutputFileName = "";
-
                 Console.WriteLine("--------------------");
                 Console.WriteLine("nslookup2csv");
                 Console.WriteLine("--------------------");
@@ -33,13 +40,12 @@ namespace nslookup2csv
 
                     strLines = File.ReadAllLines(strParams[1], objEncode);
 
-                    strOutputFileName = @".\" + Path.GetFileNameWithoutExtension(strParams[1]) + "_edited.csv";
+                    strOutputFileName = @".\" + Path.GetFileNameWithoutExtension(strParams[1]) + ".csv";
 
                     if (strLines.Length != 0)
                     {
                         File.WriteAllLines(strOutputFileName, SetOutputLines(strLines), objEncode);
                     }
-
                 }
 
                 Console.WriteLine("Output:" + Path.GetFullPath(strOutputFileName));
@@ -47,16 +53,12 @@ namespace nslookup2csv
             }
             catch (Exception ex)
             {
-                throw ex;
-            }
-            finally
-            {
-
+                Err.LogOutput(ex);
             }
         }
 
         /// <summary>
-        /// 
+        /// ParamCheck
         /// </summary>
         /// <param name="vstrParams"></param>
         /// <returns></returns>
@@ -64,12 +66,9 @@ namespace nslookup2csv
         {
             try
             {
-                if (vstrParams.Length != 2)
+                if (vstrParams.Length != 2 || File.Exists(vstrParams[1]) == false)
                 {
-                    if (File.Exists(vstrParams[1]) == false)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
                 return true;
             }
@@ -79,64 +78,67 @@ namespace nslookup2csv
             }
         }
 
-
-
+        /// <summary>
+        /// SetOutputLines
+        /// </summary>
+        /// <param name="vstrLines"></param>
+        /// <returns></returns>
         static string[] SetOutputLines(String[] vstrLines)
         {
+
             String[] strOutputLines = null;
+            string strLine = "";
+            int j = 0;
 
             try
             {
                 Array.Resize(ref strOutputLines, vstrLines.Length);
 
-                int j = 0;
-
+                // Header
                 if (vstrLines.Length > 0)
                 {
-                    strOutputLines[j] = "TARGET IP ADDRESS" + "\t" + "SERVER" + "\t" + "ADDRESS" + "\t" + "NAME" + "\t" + "ADDRESS";
-                }
+                    strOutputLines[j] = "Target" + "\t" + "Server" + "\t" + "Address" + "\t" + "Name" + "\t" + "Address";
+                }                
 
+                // Detail
                 for (int i = 0; i <= vstrLines.Length - 1; i++)
                 {
-                if (vstrLines[i].Contains("NSLOOKUP") == true)
-                    {
-                        j += 1;
-                        strOutputLines[j] += vstrLines[i].Substring(vstrLines[i].IndexOf("NSLOOKUP") + 9);
-                        strOutputLines[j].Trim();
-                        strOutputLines[j] += "\t";
-                    }
+                        strLine = vstrLines[i].ToLower();
 
+                        if (strLine.ToLower().Contains("nslookup") == true )
+                        {
+                            j += 1;
+                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("nslookup") + 9);
+                            strOutputLines[j].Trim();
+                            strOutputLines[j] += "\t";
+                        }
 
-                    if(vstrLines[i].Contains("サーバー:") == true)
-                    {
-                        strOutputLines[j] += vstrLines[i].Substring(vstrLines[i].IndexOf("サーバー:") + 6);
-                        strOutputLines[j].Trim();
-                        strOutputLines[j] += "\t";
-                    }
+                        if (strLine.Contains("サーバー:") == true)
+                        {
+                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("サーバー:") + 6);
+                            strOutputLines[j].Trim();
+                            strOutputLines[j] += "\t";
+                        }
 
-                    if (vstrLines[i].Contains("Address:") == true)
-                    {
-                        strOutputLines[j] += vstrLines[i].Substring(vstrLines[i].IndexOf("Address:") + 9);
-                        strOutputLines[j].Trim();
-                        strOutputLines[j] += "\t";
-                    }
+                        if (strLine.Contains("address:") == true)
+                        {
+                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("address:") + 9);
+                            strOutputLines[j].Trim();
+                            strOutputLines[j] += "\t";
+                        }
 
-                    if (vstrLines[i].Contains("名前:") == true)
-                    {
-                        strOutputLines[j] += vstrLines[i].Substring(vstrLines[i].IndexOf("名前:") + 4);
-                        strOutputLines[j].Trim();
-                        strOutputLines[j] += "\t";
-                    }
+                        if (strLine.Contains("名前:") == true)
+                        {
+                            strOutputLines[j] += strLine.Substring(strLine.IndexOf("名前:") + 4);
+                            strOutputLines[j].Trim();
+                            strOutputLines[j] += "\t";
+                        }
                 }
                 return strOutputLines;
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-
             }
         }
     }
