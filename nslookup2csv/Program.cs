@@ -53,7 +53,7 @@ namespace nslookup2csv
             }
             catch (Exception ex)
             {
-                Err.LogOutput(ex);
+                Common.LogOutput(ex);
             }
             finally
             {

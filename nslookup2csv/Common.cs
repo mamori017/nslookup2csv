@@ -8,9 +8,9 @@ using System.Text;
 namespace nslookup2csv
 {
     /// <summary>
-    /// Err
+    /// Error
     /// </summary>
-    class Err
+    public class Common
     {
         /// <summary>
         /// LogOutput
