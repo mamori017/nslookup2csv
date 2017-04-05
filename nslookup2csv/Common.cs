@@ -22,26 +22,16 @@ namespace nslookup2csv
             Encoding objEncoding = new UTF8Encoding(false);
             StreamWriter objWriter = new StreamWriter(@".\errorLog.txt", true, objEncoding);
 
-            try
-            {
-                objWriter.WriteLine(vobjEx);
-                objWriter.Close();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (objEncoding != null)
-                {
-                    objEncoding = null;
-                }
+            objWriter.WriteLine(vobjEx);
+            objWriter.Close();
 
-                if (objWriter != null)
-                {
-                    objWriter = null;
-                }
+            if (objEncoding != null)
+            {
+                objEncoding = null;
+            }
+            if (objWriter != null)
+            {
+                objWriter = null;
             }
         }
     }
