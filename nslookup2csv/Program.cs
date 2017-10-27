@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Common;
 
 /// <summary>
 /// nslookup2csv
@@ -12,6 +13,7 @@ namespace nslookup2csv
     /// </summary>
     class Program
     {
+        #region "Process"
         /// <summary>
         /// Main
         /// </summary>
@@ -20,7 +22,7 @@ namespace nslookup2csv
         {
             String[] strParams = Environment.GetCommandLineArgs();
             String[] strLines;
-            Encoding objEncode = Encoding.GetEncoding("shift_jis");
+            Encoding objEncode = Encoding.GetEncoding(Define.EncodingType);
             String strOutputFileName = "";
 
             try
@@ -53,7 +55,7 @@ namespace nslookup2csv
             }
             catch (Exception ex)
             {
-                Common.LogOutput(ex);
+                ExceptionProcess(ex);
             }
             finally
             {
@@ -102,14 +104,14 @@ namespace nslookup2csv
                 if (vstrLines.Length > 0)
                 {
                     strOutputLines[j] = "Target" + "\t" + "Server" + "\t" + "Address" + "\t" + "Name" + "\t" + "Address";
-                }                
+                }
 
                 // Detail
                 for (int i = 0; i <= vstrLines.Length - 1; i++)
                 {
                     strLine = vstrLines[i].ToLower();
 
-                    if (strLine.ToLower().Contains(">nslookup") == true )
+                    if (strLine.ToLower().Contains(">nslookup") == true)
                     {
                         j += 1;
                         strOutputLines[j] += strLine.Substring(strLine.IndexOf(">nslookup") + 9).Trim();
@@ -141,7 +143,7 @@ namespace nslookup2csv
                             strOutputLines[j] += vstrLines[i].Trim();
                             strOutputLines[j] += "\t";
 
-                            if (vstrLines[i+1].Trim() == "" || vstrLines[i].ToLower().Contains(">nslookup"))
+                            if (vstrLines[i + 1].Trim() == "" || vstrLines[i].ToLower().Contains(">nslookup"))
                             {
                                 break;
                             }
@@ -155,7 +157,7 @@ namespace nslookup2csv
                     }
                 }
 
-                Array.Resize(ref strOutputLines, j+1);
+                Array.Resize(ref strOutputLines, j + 1);
 
                 return strOutputLines;
             }
@@ -164,5 +166,18 @@ namespace nslookup2csv
                 throw ex;
             }
         }
+        #endregion
+
+        #region "Common process"
+        /// <summary>
+        /// Exception process
+        /// </summary>
+        /// <param name="ex"></param>
+        private static void ExceptionProcess(Exception ex)
+        {
+            Log.ExceptionOutput(ex, Define.ErrLogPath);
+        }
+        #endregion
+
     }
 }

@@ -17,7 +17,7 @@ namespace UnitTest
                 File.Delete(@".\errorLog.txt");
             }
 
-            Common.LogOutput(objEx);
+            Common.Log.ExceptionOutput(objEx, @".\errorLog.txt");
 
             Assert.AreEqual(true, File.Exists(@".\errorLog.txt"));
         }
