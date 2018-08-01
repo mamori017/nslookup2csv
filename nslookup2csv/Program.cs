@@ -25,22 +25,20 @@ namespace nslookup2csv
 
             try
             {
-                Console.WriteLine("--------------------");
-                Console.WriteLine("nslookup2csv");
-                Console.WriteLine("--------------------");
+                Message.ShowTitle();
 
                 if (ParamCheck(strParams) == false)
                 {
-                    Console.WriteLine("Parameter error");
+                    Console.WriteLine(Properties.StringFormat.Default.ParameterError);
                     return;
                 }
                 else
                 {
-                    Console.WriteLine("Target:" + Path.GetFullPath(strParams[1]));
+                    Console.WriteLine(string.Format(Properties.StringFormat.Default.Target, Path.GetFullPath(strParams[1])));
 
                     strLines = File.ReadAllLines(strParams[1], objEncode);
 
-                    strOutputFileName = @".\" + Path.GetFileNameWithoutExtension(strParams[1]) + ".csv";
+                    strOutputFileName = String.Format(Properties.StringFormat.Default.FileName,Path.GetFileNameWithoutExtension(strParams[1]));
 
                     if (strLines.Length != 0)
                     {
@@ -48,8 +46,8 @@ namespace nslookup2csv
                     }
                 }
 
-                Console.WriteLine("Output:" + Path.GetFullPath(strOutputFileName));
-                Console.WriteLine("Finish");
+                Console.WriteLine(String.Format(Properties.StringFormat.Default.Output, Path.GetFullPath(strOutputFileName)));
+                Console.WriteLine(Properties.StringFormat.Default.Finish);
             }
             catch (Exception ex)
             {
@@ -101,7 +99,7 @@ namespace nslookup2csv
                 // Header
                 if (vstrLines.Length > 0)
                 {
-                    strOutputLines[j] = "Target" + "\t" + "Server" + "\t" + "Address" + "\t" + "Name" + "\t" + "Address";
+                    strOutputLines[j] = Properties.StringFormat.Default.OutputHeader;
                 }                
 
                 // Detail
