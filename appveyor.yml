@@ -4,9 +4,11 @@ build:
   project: nslookup2csv.sln
   verbosity: minimal
 image: Visual Studio 2015
-configuration: Debug
+configuration: Release
 before_build:
-  nuget restore nslookup2csv.sln
+  - nuget restore nslookup2csv.sln
+  - mkdir .\nslookup2csv\Common
+  - git clone -q --branch=master https://github.com/mamori017/Common.git .\nslookup2csv\Common
 after_test: 
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:""nslookup2csvTests.dll" -targetdir:".\nslookup2csvTests\bin\Debug" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\MyProject_coverage.xml -filter:"+[nslookup2csv*]* -[nslookup2csvTests*]*""
     - "SET sPATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
