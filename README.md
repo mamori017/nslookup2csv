@@ -16,6 +16,7 @@ Windows nslookup command execute results change to one line, and convert to csv 
 
 - .NET Framework 4.5
 - [mamori017/Common](https://github.com/mamori017/Common)
+  - https://github.com/mamori017/Common.git
   - Add File As Link.
 
 ## Build
