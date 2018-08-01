@@ -3,8 +3,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/76xqkgtimheax97j?svg=true)](https://ci.appveyor.com/project/mamori017/nslookup2csv)
 [![codecov](https://codecov.io/gh/mamori017/nslookup2csv/branch/master/graph/badge.svg)](https://codecov.io/gh/mamori017/nslookup2csv)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b0055dfd5f94715aa87af8f9559438e)](https://www.codacy.com/app/mamori017/nslookup2csv?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mamori017/nslookup2csv&amp;utm_campaign=Badge_Grade)
-![GitHub last commit](https://img.shields.io/github/last-commit/mamori017/nslookup2csv.svg)
-![GitHub tag](https://img.shields.io/github/tag/mamori017/nslookup2csv.svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/mamori017/nslookup2csv/badge)](https://www.codefactor.io/repository/github/mamori017/nslookup2csv)
+[![BCH compliance](https://bettercodehub.com/edge/badge/mamori017/nslookup2csv?branch=master)](https://bettercodehub.com/)
 [![Release](https://img.shields.io/github/release/mamori017/nslookup2csv.svg)](https://github.com/mamori017/nslookup2csv/releases/latest)
 [![License](https://img.shields.io/github/license/mamori017/nslookup2csv.svg)](https://github.com/mamori017/nslookup2csv/blob/master/LICENSE)
 
@@ -15,6 +15,19 @@ Windows nslookup command execute results change to one line, and convert to csv 
 ## Requirement
 
 - .NET Framework 4.5
+- [mamori017/Common](https://github.com/mamori017/Common)
+  - Add File As Link.
+
+## Build
+
+|Configuration |Detail |
+|:-----|:-----|
+|Debug | Local build|
+|Release |AppVeyor CI build.|
+
+Configuration difference is Common repository file reference method. 
+
+Check .csproj for the difference.
 
 ## Usage
 
