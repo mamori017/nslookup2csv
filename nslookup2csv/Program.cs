@@ -107,26 +107,14 @@ namespace nslookup2csv
                 {
                     strLine = vstrLines[i].ToLower();
 
-                    if (strLine.ToLower().Contains(">nslookup") == true )
+                    if (strLine.ToLower().Contains(">nslookup") == true)
                     {
                         j += 1;
-                        strOutputLines[j] += strLine.Substring(strLine.IndexOf(">nslookup") + 9).Trim();
-                        strOutputLines[j] += "\t";
                     }
 
-
-                    if (strLine.Contains("サーバー:") == true)
-                    {
-                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("サーバー:") + 6).Trim();
-                        strOutputLines[j] += "\t";
-                    }
-
-
-                    if (strLine.Contains("address:") == true)
-                    {
-                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("address:") + 9).Trim();
-                        strOutputLines[j] += "\t";
-                    }
+                    strOutputLines[j] = CreateOutputLine(strLine, ">nslookup", 9);
+                    strOutputLines[j] = CreateOutputLine(strLine, "サーバー:", 6);
+                    strOutputLines[j] = CreateOutputLine(strLine, "address:", 9);
 
                     if (strLine.Contains("addresses:") == true)
                     {
@@ -136,21 +124,16 @@ namespace nslookup2csv
                         while (true)
                         {
                             i += 1;
-                            strOutputLines[j] += vstrLines[i].Trim();
-                            strOutputLines[j] += "\t";
+                            strOutputLines[j] += vstrLines[i].Trim() + "\t";
 
-                            if (vstrLines[i+1].Trim() == "" || vstrLines[i].ToLower().Contains(">nslookup"))
+                            if (vstrLines[i + 1].Trim() == "" || vstrLines[i].ToLower().Contains(">nslookup"))
                             {
                                 break;
                             }
                         }
                     }
 
-                    if (strLine.Contains("名前:") == true)
-                    {
-                        strOutputLines[j] += strLine.Substring(strLine.IndexOf("名前:") + 4).Trim();
-                        strOutputLines[j] += "\t";
-                    }
+                    strOutputLines[j] = CreateOutputLine(strLine, "名前:", 4);
                 }
 
                 Array.Resize(ref strOutputLines, j+1);
@@ -160,6 +143,18 @@ namespace nslookup2csv
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        static string CreateOutputLine(string line, string contain, int count)
+        {
+            if (line.Contains(contain) == true)
+            {
+                return line.Substring(line.IndexOf(contain) + count).Trim() + "\t";
+            }
+            else
+            {
+                return "";
             }
         }
     }
