@@ -7,4 +7,4 @@ image: Visual Studio 2015
 configuration: Debug
 before_build:
   - nuget restore nslookup2csv.sln
-  - git clone -q --branch=master https://github.com/mamori017/Common.git ..\Common
+  - git clone -q --branch=master https://github.com/mamori017/Common.git .\Common
