@@ -12,23 +12,17 @@
 
 Windows nslookup command execute results change to one line, and convert to csv file.
 
-## Requirement
-
-- .NET Framework 4.5
-- [mamori017/Common](https://github.com/mamori017/Common)
-  - https://github.com/mamori017/Common.git
-  - Add File As Link.
-
 ## Build
 
-|Configuration |Detail |
-|:-----|:-----|
-|Debug | Local build|
-|Release |AppVeyor CI build.|
+- .NET Framework 4.5.2
 
-Configuration difference is Common repository file reference method. 
+## Requirement
 
-Check .csproj for the difference.
+- [mamori017/Common](https://github.com/mamori017/Common)
+
+This project reference another repository files. 
+
+GitClone.bat is clone another repository on parent directory.
 
 ## Usage
 

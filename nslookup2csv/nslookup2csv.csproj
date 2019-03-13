@@ -42,14 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Common\Common\IO.cs" Condition=" '$(Configuration)' == 'Debug' ">
-      <Link>Common\IO.cs</Link>
-    </Compile>
     <Compile Include=".\Common\Common\IO.cs" Condition=" '$(Configuration)' == 'Release' ">
       <Link>Common\IO.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\Common\Log.cs" Condition=" '$(Configuration)' == 'Debug' ">
-      <Link>Common\Log.cs</Link>
     </Compile>
     <Compile Include=".\Common\Common\Log.cs" Condition=" '$(Configuration)' == 'Release' ">
       <Link>Common\Log.cs</Link>
@@ -79,6 +73,12 @@
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>StringFormat.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common\Common.csproj">
+      <Project>{8005ffab-810a-4608-9cbb-c1ddfd1b8d2e}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
