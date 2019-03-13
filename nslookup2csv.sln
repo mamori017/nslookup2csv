@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nslookup2csv", "nslookup2csv\nslookup2csv.csproj", "{82DA8AB7-18CB-47FD-A796-E4F54EA73AAB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E} = {8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nslookup2csvTests", "nslookup2csvTests\nslookup2csvTests.csproj", "{5A63D254-3E0C-4037-8722-EA0C960B491B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common\Common.csproj", "{8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{5A63D254-3E0C-4037-8722-EA0C960B491B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A63D254-3E0C-4037-8722-EA0C960B491B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A63D254-3E0C-4037-8722-EA0C960B491B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8005FFAB-810A-4608-9CBB-C1DDFD1B8D2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
