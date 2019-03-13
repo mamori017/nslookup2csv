@@ -24,6 +24,8 @@ This project reference another repository files.
 
 GitClone.bat is clone another repository on parent directory.
 
+Execute GitClone.bat only once before open this project.
+
 ## Usage
 
 1. Execute nslookup with cmd.exe and output it to a text file.
