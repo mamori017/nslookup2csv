@@ -20,11 +20,15 @@ Windows nslookup command execute results change to one line, and convert to csv 
 
 - [mamori017/Common](https://github.com/mamori017/Common)
 
-This project reference another repository files. 
+    | Build | Status | Test | Coverage |
+    |:-----------|:------------|:-----------|:------------|
+    | Appveyor | [![Build status](https://ci.appveyor.com/api/projects/status/1yi6bho565k8xk6e?svg=true)](https://ci.appveyor.com/project/mamori017/common) | Codecov |[![codecov](https://codecov.io/gh/mamori017/Common/branch/master/graph/badge.svg)](https://codecov.io/gh/mamori017/Common)|
+    
+    This project reference another repository files. 
 
-GitClone.bat is clone another repository on parent directory.
+    GitClone.bat is clone another repository on parent directory.
 
-Execute GitClone.bat only once before open this project.
+    Execute GitClone.bat only once before open this project.
 
 ## Usage
 
