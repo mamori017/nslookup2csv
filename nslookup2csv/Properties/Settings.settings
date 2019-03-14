@@ -8,5 +8,8 @@
     <Setting Name="ExFileName" Type="System.String" Scope="User">
       <Value Profile="(Default)">error.log</Value>
     </Setting>
+    <Setting Name="EncodeType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">shift_jis</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
